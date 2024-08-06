@@ -6,3 +6,4 @@ package-lock.json
 yard-lock.json
 .DS_Store
 .next/
+out/*

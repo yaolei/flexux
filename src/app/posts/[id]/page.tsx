@@ -8,4 +8,12 @@ const Blog = ({params}: {params:{id:string}}) => {
     return <h1>This is Blog{params.id}</h1>
 }
 
+export function generateStaticParams() {
+    return [
+      { id: '1' },
+      { id: '2' },
+      { id: '3' },
+    ];
+  }
+
 export default Blog;

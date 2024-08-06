@@ -2,6 +2,13 @@ type Repository = {
     fullname:string
 }
 
+export function generateStaticParams() {
+  return [
+    { name: '1' },
+    { name: '2' },
+    { name: '3' },
+  ];
+}
 
 const page = () => {
 
