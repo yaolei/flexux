@@ -7,7 +7,7 @@ type ParamsRespose = {
     content:string;
 }
 
-export const getChatData = async (token:string, messages: ParamsRespose[] ) => {
+const getChatData = async (token:string, messages: ParamsRespose[] ) => {
     const options = await fetch(`https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/ernie-speed-128k?access_token=${token}`, {
         headers: {
             'Content-Type': 'application/json',

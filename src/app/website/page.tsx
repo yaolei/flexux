@@ -9,7 +9,7 @@ type WebProgs = {
     exntendClass: string;
 }
 
-export const getImgaes = async(num:number) => {
+const getImages = async(num:number) => {
     const currentImg = await fetch(`https://picsum.photos/1600/800?random=${num}`)
     if (!currentImg.ok) throw new Error(`Could not img `)
     return currentImg.url;
@@ -23,7 +23,7 @@ export default function Page () {
         let getRatio = (el:any) => window.innerHeight / (window.innerHeight + el.offsetHeight);
         gsap.utils.toArray("section").forEach(async (section:any, i) => {
         section.bg = section.querySelector(".bg"); 
-        const imgBg = await getImgaes(i)
+        const imgBg = await getImages(i)
         section.bg.style.backgroundImage = `url(${imgBg})`;
 
         gsap.fromTo(section.bg, {
