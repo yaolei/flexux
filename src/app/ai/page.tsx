@@ -29,7 +29,9 @@ const TypeWrite = ({text}:{text:string}) => {
 }
 
 const getAccess = async (messages:MessagePro[]) => {
-  const data = await fetch(`http://localhost:3000/api/chat`, {
+  // const url = `${location.protocol}//${location.host}/api/chat`;
+  const url = `${location.protocol}//${location.host}/api/ai-chat`;
+  const data = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
     },

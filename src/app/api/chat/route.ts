@@ -31,6 +31,9 @@ export async function POST (req:NextRequest, res: NextResponse)  {
         mode: 'no-cors',
     })
     const messages = await req.text()
+    console.log("@@@@@@@@@")
+    console.log(messages)
+    console.log("@@@@@@@@@")
     let jsonData = JSON.parse(messages);
 
     const v = await data.json();
