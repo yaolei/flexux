@@ -22,7 +22,8 @@ export default function Page () {
         //     },
         //     body: JSON.stringify({ userId:"testID", name:"Evan" }),
         // })
-        const url = `https://${window.location.host}/api/query-user`;
+        // const url = `http://${window.location.host}/api/query-user`;
+        const url = "http://localhost:3000/api/query-user"
         const queryDb = await fetch(url, {
             method: 'POST',
             headers: {
