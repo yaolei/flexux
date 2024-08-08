@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pro": "pm2 start npm --name \"flexux\" -- run start"
   },
   "dependencies": {
     "@prisma/client": "5.17.0",
