@@ -45,7 +45,9 @@ const getAccessToken = async () => {
         const messages = req.body;
 
         const {result, id} = await getChatData(accessToken, messages)
-
+        console.log("################################ record result ########")
+        console.log(result)
+        console.log("################################ record result ########")
          const responseData  = [...messages, {'role': 'assistant', 'content':result.toString(), "id": id}]
         return res.status(200).json(responseData)
 
