@@ -2,18 +2,22 @@ const NAVLISTROUTER = [
     {
         href: '/website',
         label: '首页',
+        MenuIconIndex:  0
     },
     {
         href: "/posts",
-        label: '文章'
+        label: '文章',
+        MenuIconIndex:  1
     },
     {
         href: '/ai',
         label: 'Ai Chat',
+        MenuIconIndex:  2
     },
     {
         href: '/newfeature',
         label: '新功能测试',
+        MenuIconIndex:  3
     },
 ]
 

@@ -7,3 +7,4 @@ yard-lock.json
 .DS_Store
 .next/
 out/*
+yarn.lock

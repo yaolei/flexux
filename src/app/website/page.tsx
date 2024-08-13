@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {WEBSITEPRO} from '../../lib/navlist'
 import Loading from './loading'
+
 type WebProgs = {
     label: string;
     exntendClass: string;
@@ -50,7 +51,7 @@ export default function Page () {
             {WEBSITEPRO.map(section => (
                 <section key={section.label + section.exntendClass}>
                     <div className={section.exntendClass}></div>
-                    <h1>{section.label}</h1>
+                    <h1 className=' text-center'>{section.label}</h1>
                 </section>
             ))}
         </div>
