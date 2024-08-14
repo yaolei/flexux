@@ -19,6 +19,11 @@ const NAVLISTROUTER = [
         label: '新功能测试',
         MenuIconIndex:  3
     },
+    {
+        href: '/logActions',
+        label: 'log',
+        MenuIconIndex:  4
+    },
 ]
 
 const WEBSITEPRO = [

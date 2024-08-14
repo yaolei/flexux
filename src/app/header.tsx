@@ -13,7 +13,7 @@ const Header = () => {
               <WebNav />
             </div>
           </div>
-          <div className='md:hidden w-20' >
+          <div className='md:hidden w-20 text-right' >
             <MobileNav />
           </div>
         </div>

@@ -7,7 +7,9 @@ type ParamsRespose = {
     content:string;
 }
 
+process.env.tokens = ""
 const getChatData = async (token:string, messages: ParamsRespose[] ) => {
+
     const options = await fetch(`https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/ernie-speed-128k?access_token=${token}`, {
         headers: {
             'Content-Type': 'application/json',
@@ -36,18 +38,19 @@ const getAccessToken = async () => {
       throw new Error('Failed to fetch access token');
     }
     const data = await response.json();
-    return data.access_token;
+    process.env.tokens = data.access_token;
   };
 
  const handler  = async (req:NextApiRequest, res:NextApiResponse) => {
     try {
-        const accessToken = await getAccessToken();
+        if (!process.env.tokens || process.env.tokens == '') {
+          await getAccessToken();
+        }
+        const accessToken:string = process.env.tokens||''
         const messages = req.body;
 
         const {result, id} = await getChatData(accessToken, messages)
-        console.log("################################ record result ########")
-        console.log(result)
-        console.log("################################ record result ########")
+        console.log(result, "%%%%%%%%%")
         const responseData  = [...messages, {'role': 'assistant', 'content':result?.toString(), "id": id}]
         return res.status(200).json(responseData)
 

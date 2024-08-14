@@ -68,7 +68,7 @@ const MobileNav = () => {
                 {Icons[mobileRoute?.MenuIconIndex]}
                 <Link href={mobileRoute?.href ? mobileRoute?.href:""}
                 onClick={()=> setMeuneState(false)}
-                 className={`text-zinc-400 transition ${pathname === mobileRoute.href?  " text-indigo-300 font-bold": "text-zinc-900"}  `}>
+                 className={`text-zinc-900 transition w-full ${pathname === mobileRoute.href?  " text-indigo-300 font-bold": ""}  `}>
                 <p>{mobileRoute.label}</p>
                 </Link>
             </DropdownMenuItem>
