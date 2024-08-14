@@ -9,7 +9,7 @@ module.exports = {
         log_rotate: {
           days: 2, 
           size: '100M', 
-          expire: 2, 
+          expire: 3, 
         },
       },
     ],
