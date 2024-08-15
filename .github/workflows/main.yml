@@ -25,7 +25,7 @@ jobs:
         last_ssh: |
             echo $LASTSSH && 
             (cd /var/www) &&
-            (mkdir test1/test1)
+            (mkdir test1)
 
 
         
