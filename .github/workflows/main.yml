@@ -24,9 +24,9 @@ jobs:
     # just test the server config 
     - name: test env arg
       run: | 
-         echo ${{ var.REMOTE_HOST }}
+         echo ${{ vars.REMOTE_HOST }}
     - name: Deploy to Remote Host
       run: |
-        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ var.REMOTE_HOST }} 
+        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ vars.REMOTE_HOST }} 
 
         
