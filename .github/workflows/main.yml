@@ -27,6 +27,7 @@ jobs:
         remote-path: /var/www/flexux
         host: ${{secrets.REMOTE_HOST}}
         username: ${{secrets.REMOTE_USER}}
+        port: 22
         password: ${{secrets.REMOTE_PAS}}
         yarn: true
         pm2-id: ${{secrets.REMOVE_APPNAME}}
