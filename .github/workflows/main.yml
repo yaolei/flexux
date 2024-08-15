@@ -24,7 +24,7 @@ jobs:
     - name: ssh to ali server
       uses: Techie-Pi/node-vps-deployment@v1.1
       with: 
-        remote-path: "/var/www/flexux"
+        remote-path: /var/www/flexux
         host: ${{secrets.REMOTE_HOST}}
         username: ${{secrets.REMOTE_USER}}
         password: ${{secrets.REMOTE_PAS}}
