@@ -29,6 +29,7 @@ jobs:
         port: 22
         user: ${{ secrets.REMOTE_USER }}
         pass: ${{ secrets.REMOTE_PAS }}
+        last_ssh: cd /var/www/ mkdir test
 
 
         
