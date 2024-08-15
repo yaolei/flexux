@@ -24,9 +24,12 @@ jobs:
     # just test the server config 
     - name: test env arg
       run: | 
-         echo ${{secrets.REMOTE_HOST}}
-         echo ${{secrets.REMOTE_PAS}}
-         echo ${{secrets.REMOTE_PAS}}
+         echo ${{ secrets.REMOTE_HOST }}
+         echo ${{ secrets.REMOTE_PAS }}
+         echo ${{ secrets.REMOTE_PAS }}
+    - name: Deploy to Remote Host
+      run: |
+        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh user@${{ secrets.REMOTE_HOST }} 'your command here'
     - name: ssh to ali server
       uses: Techie-Pi/node-vps-deployment@v1.1
       with: 
