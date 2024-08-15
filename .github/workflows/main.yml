@@ -23,8 +23,19 @@ jobs:
         user: ${{ secrets.REMOTE_USER }}
         pass: ${{ secrets.REMOTE_PAS }}
         last_ssh: |
-            cd /var/www &&
-            mkdir test1
+            cd /var/www/flexux &&
+            echo "start pull code from git hub..." &&
+            git pull &&
+            echo "start excute  npm install ...." &&
+            npm install &&
+            echo "start excute npm build ..." &&  
+            npm build &&
+            echo "start excute pm2 restart command ...." &&
+            pm2 list &&
+            pm2 restart pm2.congfig.js &&
+            echo " start excute nginx server ...." &&
+            systemctl restart nginx &&
+            echo "all step complate.!!!!!! "
 
 
         
