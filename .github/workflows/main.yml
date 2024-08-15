@@ -29,7 +29,7 @@ jobs:
          echo ${{ secrets.REMOTE_PAS }}
     - name: Deploy to Remote Host
       run: |
-        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh root@${{ secrets.REMOTE_HOST }} 
+        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ secrets.REMOTE_HOST }} 
     - name: ssh to ali server
       uses: Techie-Pi/node-vps-deployment@v1.1
       with: 
