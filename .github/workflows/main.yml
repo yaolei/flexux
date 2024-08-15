@@ -21,6 +21,12 @@ jobs:
       run: npm i
     - name: build app
       run: npm run build --if-present
+    # just test the server config 
+    - name: test env arg
+      run: | 
+         echo ${{secrets.REMOTE_HOST}}
+         echo ${{secrets.REMOTE_PAS}}
+         echo ${{secrets.REMOTE_PAS}}
     - name: ssh to ali server
       uses: Techie-Pi/node-vps-deployment@v1.1
       with: 
@@ -30,5 +36,5 @@ jobs:
         port: 22
         password: ${{secrets.REMOTE_PAS}}
         yarn: true
-        pm2-id: ${{secrets.REMOTE_APPNAME}}
+        pm2-id: ${{secrets.REMOTE_PAS}}
         
