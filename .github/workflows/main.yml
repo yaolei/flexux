@@ -23,9 +23,8 @@ jobs:
         user: ${{ secrets.REMOTE_USER }}
         pass: ${{ secrets.REMOTE_PAS }}
         last_ssh: |
-            echo "logi in server." && 
-            (cd /var/www) &&
-            (mkdir test1)
+            cd /var/www &&
+            mkdir test1
 
 
         
