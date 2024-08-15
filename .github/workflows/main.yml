@@ -24,18 +24,18 @@ jobs:
         pass: ${{ secrets.REMOTE_PAS }}
         last_ssh: |
             cd /var/www/flexux &&
-            echo "start pull code from git hub..." &&
+            echo "🔔 1.start pull code from git hub..." &&
             git pull &&
-            echo "start excute  npm install ...." &&
+            echo "🔔 2.start excute  npm install ...." &&
             npm install &&
-            echo "start excute npm build ..." &&  
-            npm build &&
-            echo "start excute pm2 restart command ...." &&
+            echo "🔔 3.start excute npm build ..." &&  
+            yarn build &&
+            echo "🔔 4.start excute pm2 restart command ...." &&
             pm2 list &&
             pm2 restart pm2.congfig.js &&
-            echo " start excute nginx server ...." &&
+            echo " 🔔 5.start excute nginx server ...." &&
             systemctl restart nginx &&
-            echo "all step complate.!!!!!! "
+            echo "😊 6.all step complate.!!!!!! "
 
 
         
