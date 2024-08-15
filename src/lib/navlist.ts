@@ -21,7 +21,7 @@ const NAVLISTROUTER = [
     },
     {
         href: '/logActions',
-        label: 'log',
+        label: 'Error Log',
         MenuIconIndex:  4
     },
 ]

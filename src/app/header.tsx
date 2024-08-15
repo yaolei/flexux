@@ -9,7 +9,7 @@ const Header = () => {
             <div className='flex-1  font-bold text-shadow sm:text-[4vw] md:pr-0 sm:pr-[10vw] lg:text-4xl'>
               <h1>Flexux</h1>
             </div>
-            <div className='flex-none sm:hidden md:block max-w-[300px]' >
+            <div className='flex-none sm:hidden md:block max-w-[500px]' >
               <WebNav />
             </div>
           </div>
