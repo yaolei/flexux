@@ -22,11 +22,13 @@ jobs:
     - name: build app
       run: npm run build --if-present
     # just test the server config 
-    - name: test env arg
-      run: | 
-         echo ${{ vars.REMOTE_HOST }}
     - name: Deploy to Remote Host
-      run: |
-        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ vars.REMOTE_HOST }} 
+    - uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      with: 
+        host: ${{vars.REMOTE_HOST}}
+        port: 22
+        user: ${{ secrets.REMOTE_USER }}
+        pass: ${{ secrets.REMOTE_PAS }}
+
 
         
