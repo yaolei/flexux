@@ -32,7 +32,7 @@ jobs:
             yarn build &&
             echo "🔔 4.start excute pm2 restart command ...." &&
             pm2 list &&
-            pm2 restart pm2.congfig.js &&
+            pm2 restart pm2.config.js &&
             echo " 🔔 5.start excute nginx server ...." &&
             systemctl restart nginx &&
             echo "😊 6.all step complate.!!!!!! "
