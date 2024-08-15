@@ -24,20 +24,9 @@ jobs:
     # just test the server config 
     - name: test env arg
       run: | 
-         echo ${{ secrets.REMOTE_HOST }}
-         echo ${{ secrets.REMOTE_PAS }}
-         echo ${{ secrets.REMOTE_PAS }}
+         echo ${{ var.REMOTE_HOST }}
     - name: Deploy to Remote Host
       run: |
-        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ secrets.REMOTE_HOST }} 
-    - name: ssh to ali server
-      uses: Techie-Pi/node-vps-deployment@v1.1
-      with: 
-        remote-path: /var/www/flexux
-        host: ${{secrets.REMOTE_HOST}}
-        username: ${{secrets.REMOTE_USER}}
-        port: 22
-        password: ${{secrets.REMOTE_PAS}}
-        yarn: true
-        pm2-id: ${{secrets.REMOTE_PAS}}
+        sshpass -p "${{ secrets.REMOTE_PAS }}" ssh -T root@${{ var.REMOTE_HOST }} 
+
         
