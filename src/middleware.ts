@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from 'next/server'
 
-const allowedOrigins = ['https://localhost:3000', 'http://8.152.161.200']
+const allowedOrigins = ['https://localhost:3000', 'http://8.152.161.200', 'http://www.flexux.cn:']
  
 const corsOptions = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',

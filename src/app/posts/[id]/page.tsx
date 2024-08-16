@@ -5,6 +5,7 @@ export async function generateMetadata ({params}: {params:{id:string}}) {
 }
 
 const Blog = ({params}: {params:{id:string}}) => {
+  console.log(params.id)
     return <h1>This is Blog{params.id}</h1>
 }
 

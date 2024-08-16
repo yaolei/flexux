@@ -95,7 +95,7 @@ export default function Chat () {
                 <UserPenIcon className="size-8"/>
               </div>
           </div>:
-           <div className="flex justify-start">
+           <div className="flex justify-start break-words">
             <div><UserCheck2Icon className="size-8"/></div>
                 <TypeWrite text={m.content} typingFun={async (s) => compplateTyping(s)}/>
            </div>
@@ -103,7 +103,7 @@ export default function Chat () {
         </div>
       ))}
       {isLoding? 
-        <div className="flex justify-start">
+        <div className="flex justify-start break-words">
         <div><UserCheck2Icon className="size-8"/></div>
         <div className="ml-2 bg-rose-100 rounded-[6px] p-2">
           <img src="/images/loading.svg" className="w-6 animate-spin h-5  mr-3"/>

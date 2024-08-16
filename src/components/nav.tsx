@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link'
 import {NAVLISTROUTER} from '../lib/navlist'
 import {MenuIcon} from 'lucide-react'
-import {useState} from 'react'
+import {useState, createRef} from 'react'
 import {
     User,
     Settings,
@@ -56,22 +56,20 @@ const Icons = [
 
 const MobileNav = () => {
   const pathname = usePathname();
-  const [MeuneState, setMeuneState] = useState(false)
   return(
-  <DropdownMenu onOpenChange={() => MeuneState}>
+  <DropdownMenu >
     <DropdownMenuTrigger><MenuIcon className='text-left'/></DropdownMenuTrigger>
     <DropdownMenuContent className='md:w-full sm:w-[770px] mt-4 font-sans font-normal tracking-wider'>
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       { NAVLISTROUTER && NAVLISTROUTER.map((mobileRoute:IconPropsType)=> (
+          <Link key={mobileRoute.href + mobileRoute.label} href={mobileRoute?.href ? mobileRoute?.href:""}
+            className={`text-zinc-900 transition w-full ${pathname === mobileRoute.href?  " text-indigo-300 font-bold": ""}  `}>
             <DropdownMenuItem key={mobileRoute.href + mobileRoute.label} className='leading-5'>
                 {Icons[mobileRoute?.MenuIconIndex]}
-                <Link href={mobileRoute?.href ? mobileRoute?.href:""}
-                onClick={()=> setMeuneState(false)}
-                 className={`text-zinc-900 transition w-full ${pathname === mobileRoute.href?  " text-indigo-300 font-bold": ""}  `}>
                 <p>{mobileRoute.label}</p>
-                </Link>
             </DropdownMenuItem>
+            </Link>
         ))}
     </DropdownMenuContent>
   </DropdownMenu>

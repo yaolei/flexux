@@ -1,6 +1,6 @@
 const NAVLISTROUTER = [
     {
-        href: '/website',
+        href: '/',
         label: '首页',
         MenuIconIndex:  0
     },
