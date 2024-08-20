@@ -2,7 +2,6 @@
 import { usePathname } from 'next/navigation'
 const Footer = () => {
     const pathName = usePathname()
-    console.log(pathName)
     return (
         <footer className="fixed text-center w-full pb-2 text-gray-400 bottom-0">
             {pathName === '/' ? <p>辽ICP备2024037165</p>: 
