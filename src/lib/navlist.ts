@@ -24,6 +24,11 @@ const NAVLISTROUTER = [
         label: 'Error Log',
         MenuIconIndex:  4
     },
+    {
+        href: '/login',
+        label: 'Login',
+        MenuIconIndex:  5
+    },
 ]
 
 const WEBSITEPRO = [

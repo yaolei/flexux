@@ -3,13 +3,13 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link'
 import {NAVLISTROUTER} from '../lib/navlist'
 import {MenuIcon} from 'lucide-react'
-import {useState, createRef} from 'react'
 import {
     User,
     Settings,
     UserPlus,
     Mail,
     LogOut,
+    LogIn,
   } from 'lucide-react'
 import {
   DropdownMenu,
@@ -52,6 +52,7 @@ const Icons = [
   <UserPlus className="mr-2 h-4 w-4"/>, 
   <Mail className="mr-2 h-4 w-4"/>, 
   <LogOut className="mr-2 h-4 w-4"/>, 
+  <LogIn className="mr-2 h-4 w-4"/>, 
 ]
 
 const MobileNav = () => {
