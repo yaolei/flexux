@@ -1,12 +1,20 @@
 import {db} from '@/lib/db'
 import {NextApiRequest, NextApiResponse} from 'next'
 import {hashPassword} from '@/lib/setAccess'
+
+type UserCreateInput = {
+    name:string
+    password:string, 
+    userId:string
+    createdTime: string
+    lastUpdatedTime: string
+}
+
 const generateUserId = async () => {
     const userCount = await db.user.count()
     const userId = String(userCount).padStart(4, '0')
     return userId
 }
-
 const handler = async (
     req:NextApiRequest, res:NextApiResponse
 ) => {
@@ -22,7 +30,7 @@ const handler = async (
               userId:newUserId,
               createdTime: createdDate.toISOString(),
               lastUpdatedTime: createdDate.toISOString()
-            },
+            } as UserCreateInput,
           });
 
           const newUserEmail = await db.profile.create({
