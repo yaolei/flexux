@@ -10,11 +10,6 @@ type UserCreateInput = {
     lastUpdatedTime: string
 }
 
-type UserProile = {
-    bio: string
-    email:string
-    userId:string
-}
 
 const generateUserId = async () => {
     const userCount = await db.user.count()
@@ -43,8 +38,8 @@ const handler = async (
             data:{
                 bio: "1", // roles
                 email:email,
-                userId:newUserId
-            } as UserProile
+                userId:newUserId as string
+            } 
           })
       
         return res.status(200).json({
