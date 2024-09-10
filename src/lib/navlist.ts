@@ -26,7 +26,7 @@ const NAVLISTROUTER = [
     },
     {
         href: '/login',
-        label: 'Login',
+        label: 'login',
         MenuIconIndex:  5
     },
 ]

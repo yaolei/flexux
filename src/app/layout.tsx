@@ -3,7 +3,7 @@ import "./globals.css";
 import Footer from './footer'
 import Header from './header'
 import ThemeProvider from './providers'
-
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Evan's AI App",
@@ -24,7 +24,7 @@ export default function RootLayout({
         <ThemeProvider> 
           {children} 
         </ThemeProvider>
-
+        <Toaster/>
         <Footer />
       </body>
     </html>
