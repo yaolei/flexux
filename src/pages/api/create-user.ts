@@ -22,7 +22,7 @@ const handler = async (
     const createdDate = new Date();
 
     try {
-        const newUserId = await generateUserId();
+        const newUserId:string = await generateUserId();
         const newUser = await db.user.create({
             data: {
               name:username,
