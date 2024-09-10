@@ -10,6 +10,12 @@ type UserCreateInput = {
     lastUpdatedTime: string
 }
 
+type UserProile = {
+    bio: string
+    email:string
+    userId:string
+}
+
 const generateUserId = async () => {
     const userCount = await db.user.count()
     const userId = String(userCount).padStart(4, '0')
@@ -38,7 +44,7 @@ const handler = async (
                 bio: "1", // roles
                 email:email,
                 userId:newUserId
-            }
+            } as UserProile
           })
       
         return res.status(200).json({
