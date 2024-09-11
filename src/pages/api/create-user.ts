@@ -39,18 +39,18 @@ const handler = async (
             } as UserCreateInput,
           });
 
-          const newUserEmail = await db.profile.create({
-            data:{
-                bio: "1", // roles
-                email:email,
-                user:{
-                    connect:{
-                        id:newUser.id,
-                        userId:newUser.userId,
-                    }
-                }
-            }  
-          })
+        //   const newUserEmail = await db.profile.create({
+        //     data:{
+        //         bio: "1", // roles
+        //         email:email,
+        //         user:{
+        //             connect:{
+        //                 id:newUser.id,
+        //                 userId:newUser.userId,
+        //             }
+        //         }
+        //     }  
+        //   })
       
         return res.status(200).json({
             error:null,
