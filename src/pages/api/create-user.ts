@@ -9,6 +9,11 @@ type UserCreateInput = {
     createdTime: string
     lastUpdatedTime: string
 }
+interface userProfile {
+    bio: string
+    email:string
+    userId:string 
+}
 
 
 const generateUserId = async () => {
@@ -38,8 +43,8 @@ const handler = async (
             data:{
                 bio: "1", // roles
                 email:email,
-                userId:newUserId as string
-            } 
+                userId:newUserId 
+            }  as userProfile
           })
       
         return res.status(200).json({
