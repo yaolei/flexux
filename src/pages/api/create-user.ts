@@ -12,7 +12,7 @@ type UserCreateInput = {
 interface userProfile {
     bio: string
     email:string
-    userId?:string 
+    userId:string 
 }
 
 
@@ -43,8 +43,12 @@ const handler = async (
             data:{
                 bio: "1", // roles
                 email:email,
-                userId:newUserId 
-            }  as userProfile
+                user:{
+                    connect:{
+                        userId:newUserId,
+                    }
+                }
+            }  
           })
       
         return res.status(200).json({
