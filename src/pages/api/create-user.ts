@@ -12,7 +12,7 @@ type UserCreateInput = {
 interface userProfile {
     bio: string
     email:string
-    userId:string 
+    userId?:string 
 }
 
 
