@@ -45,6 +45,7 @@ const handler = async (
                 email:email,
                 user:{
                     connect:{
+                        id:newUser.id,
                         userId:newUser.userId,
                     }
                 }
