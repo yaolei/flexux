@@ -9,11 +9,6 @@ type UserCreateInput = {
     createdTime: string
     lastUpdatedTime: string
 }
-interface userProfile {
-    bio: string
-    email:string
-    userId:string 
-}
 
 
 const generateUserId = async () => {
@@ -26,7 +21,9 @@ const handler = async (
 ) => {
     const {username, email, password} = req.body;
     const createdDate = new Date();
-
+    console.log(username)
+    console.log(email)
+    console.log(password)
     try {
         const newUserId:string = await generateUserId();
         const newUser = await db.user.create({
@@ -56,8 +53,9 @@ const handler = async (
             error:null,
             states: "ok"
         })
-    } catch (error) {
+    } catch (error:any) {
         console.log(error)
+        throw new Error(error.message)
     }
 
 }
