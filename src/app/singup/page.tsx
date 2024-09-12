@@ -63,7 +63,6 @@ async function singupAction(userprofile:RequestArgs) {
             body: JSON.stringify(userprofile),
         })
         // const json = await queryDb.json()
-        console.log(queryDb, "this is the result@@@@@")
         if( queryDb.ok) {
             console.log("success new record create to db")
             return resu;

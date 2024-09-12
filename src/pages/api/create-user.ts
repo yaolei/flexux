@@ -12,18 +12,21 @@ type UserCreateInput = {
 
 
 const generateUserId = async () => {
-    const userCount = await db.user.count()
-    const userId = String(userCount).padStart(4, '0')
-    return userId
+    try {
+        const userCount = await db.user.count()
+        const userId = String(userCount).padStart(4, '0')
+        return userId
+
+    } catch (error:any) {
+        throw new Error(error.message)
+    }
+
 }
 const handler = async (
     req:NextApiRequest, res:NextApiResponse
 ) => {
     const {username, email, password} = req.body;
     const createdDate = new Date();
-    console.log(username)
-    console.log(email)
-    console.log(password)
     try {
         const newUserId:string = await generateUserId();
         const newUser = await db.user.create({
@@ -54,7 +57,6 @@ const handler = async (
             states: "ok"
         })
     } catch (error:any) {
-        console.log(error)
         throw new Error(error.message)
     }
 
