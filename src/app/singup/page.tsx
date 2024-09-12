@@ -47,7 +47,7 @@ const formSchema = z.object({
     email: z.string(),
 })
 
-export async function singupAction(userprofile:RequestArgs) {
+async function singupAction(userprofile:RequestArgs) {
     const url = `${location.protocol}//${location.host}/api/create-user`;
     const resu = {
         status: "200",
