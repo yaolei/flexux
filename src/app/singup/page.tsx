@@ -23,7 +23,6 @@ import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 import {Label} from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
-import singupAction from './singupAction'
 import { useRouter } from 'next/navigation';
 
 const iconStyle:string = " mr-2 size-10 ";
@@ -48,6 +47,34 @@ const formSchema = z.object({
     email: z.string(),
 })
 
+export async function singupAction(userprofile:RequestArgs) {
+    const url = `${location.protocol}//${location.host}/api/create-user`;
+    const resu = {
+        status: "200",
+        title: "Success",
+        msg: "Your Account is Created Success."
+    }
+    try {
+        const queryDb = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userprofile),
+        })
+        const json = await queryDb.json()
+
+        if( queryDb.ok) {
+            console.log("success new record create to db")
+            return resu;
+        }
+    } catch (error: any) {
+        resu.msg = error.message;
+        resu.status = "500";
+        resu.title = "Error creating record"
+        return resu;
+    }
+}
 
 export default function profileForm () {
     const [togglePasswordVisibility, setTogglePasswordVisibility] = useState<boolean>(false);
@@ -68,8 +95,8 @@ export default function profileForm () {
    async function onSubmit(values:z.infer<typeof formSchema>) {
         const result  = await singupAction(values)
         toast({
-            title: result.title,
-            description: result.msg,
+            title: result?.title,
+            description: result?.msg,
             duration: 1000,
         })
         setTimeout(() => {
