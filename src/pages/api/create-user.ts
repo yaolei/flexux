@@ -18,7 +18,7 @@ const generateUserId = async () => {
         return userId
 
     } catch (error:any) {
-        throw new Error(error.message)
+        throw new Error(error.message + "this is count error")
     }
 
 }
@@ -28,12 +28,13 @@ const handler = async (
     const {username, email, password} = req.body;
     const createdDate = new Date();
     try {
-        const newUserId:string = await generateUserId();
+        // const newUserId:string = await generateUserId();
         const newUser = await db.user.create({
             data: {
               name:username,
               password:hashPassword(password),  
-              userId:newUserId,
+              userId:"0000",
+            //   userId:newUserId,
               createdTime: createdDate.toISOString(),
               lastUpdatedTime: createdDate.toISOString()
             } as UserCreateInput,
