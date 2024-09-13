@@ -28,13 +28,12 @@ const handler = async (
     const {username, email, password} = req.body;
     const createdDate = new Date();
     try {
-        // const newUserId:string = await generateUserId();
+        const newUserId:string = await generateUserId();
         const newUser = await db.user.create({
             data: {
               name:username,
               password:hashPassword(password),  
-              userId:"0000",
-            //   userId:newUserId,
+              userId:newUserId,
               createdTime: createdDate.toISOString(),
               lastUpdatedTime: createdDate.toISOString()
             } as UserCreateInput,
