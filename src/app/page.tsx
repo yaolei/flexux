@@ -13,13 +13,13 @@ interface SectionElement extends HTMLElement {
  const PageContent = () => {
     const {data:images} =  useImages()
       useEffect(() => {
-        if (images.length === 0) return;
+        if (images && images.length === 0) return;
         const getRatio = (el: HTMLElement) =>
           window.innerHeight / (window.innerHeight + el.offsetHeight);
     
         gsap.utils.toArray<SectionElement>('section').forEach((section, i) => {
           section.bg = section.querySelector('.bg') as HTMLElement;
-          if (section.bg.style) {
+          if (images && section.bg.style) {
             // This will only happen on the client side
               section.bg.style.backgroundImage = `url(${images[i]})`;
     
