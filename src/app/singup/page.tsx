@@ -33,6 +33,12 @@ type RequestArgs = {
     email?: string;
 }
 
+type ResponseMessage =  {
+    error: boolean
+    states: string
+    message: string
+}
+
 const formSchema = z.object({
     username:z.string().min(2, {
         message: `username must be at least 2 characters.`
@@ -49,11 +55,6 @@ const formSchema = z.object({
 
 async function singupAction(userprofile:RequestArgs) {
     const url = `${location.protocol}//${location.host}/api/create-user`;
-    const resu = {
-        status: "200",
-        title: "Success",
-        msg: "Your Account is Created Success."
-    }
     try {
         const queryDb = await fetch(url, {
             method: 'POST',
@@ -62,16 +63,11 @@ async function singupAction(userprofile:RequestArgs) {
             },
             body: JSON.stringify(userprofile),
         })
-        // const json = await queryDb.json()
-        if( queryDb.ok) {
-            console.log("success new record create to db")
-            return resu;
-        }
+        const t:ResponseMessage = await queryDb.json();
+        console.log(t.message);
+        return t;
     } catch (error: any) {
-        resu.msg = error.message;
-        resu.status = "500";
-        resu.title = "Error creating record"
-        return resu;
+        throw new Error(error.message)
     }
 }
 
@@ -92,16 +88,18 @@ export default function profileForm () {
     })
 
    async function onSubmit(values:z.infer<typeof formSchema>) {
-        const result  = await singupAction(values)
+        const {states, message, error}  = await singupAction(values)
         toast({
-            title: result?.title,
-            description: result?.msg,
-            duration: 1000,
+            title: error ?`Error: error number - ${states}`:  `Success !` ,
+            description: message,
+            duration: error? 5000 :1000,
+            variant: error? "destructive": "default",
         })
-        setTimeout(() => {
-            router.push("login")
-        }, 1500)
-        
+       if  (!error) {
+            setTimeout(() => {
+                router.push("login")
+            }, 1500)
+       }    
     }
 
     const handleTogglePsd = (toggleType:boolean) => {

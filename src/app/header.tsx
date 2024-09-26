@@ -1,7 +1,6 @@
 import {WebNav, MobileNav} from '../components/nav'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const Header = () => {
-
     return (
       <header className="fixed top-0 z-10 w-full bg-slate-100 shadow-md shadow-zinc-500">
         <div className='flex flex-row justify-center items-center m-4'>
@@ -11,7 +10,6 @@ const Header = () => {
             </div>
             <div className='flex-none sm:hidden md:flex justify-between items-center max-w-[600px]' >
               <WebNav />
-
               <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>FL</AvatarFallback>

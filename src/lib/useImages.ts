@@ -1,18 +1,5 @@
 import useSWR from 'swr'
 import gsap from 'gsap'
-import { count } from 'console';
-
-const fetcher = async (url:string) => {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Could not fetch images");
-        return response.url
-    } catch (error) {
-        console.error("Fetch error:", error);
-        throw error;
-    }
-}
-
 
 const fetchPublicImgsList:any = async () => {
     try {
@@ -41,8 +28,6 @@ const fetchImages = async () => {
         const imgJson = JSON.parse(await fetchPublicImgsList())
         const imgUrls: string[] = [];
         for (let i = 0; i < sections.length; i++) {
-          console.log(baseImagePath+imgJson[i])
-          console.log(imgJson[i])
           imgUrls.push(baseImagePath+imgJson[i])
         }
         sessionStorage.setItem('fetchedImages', JSON.stringify(imgUrls));
