@@ -3,6 +3,7 @@ import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import {useState} from 'react'
+import Cookies from 'js-cookie';
 import {
     Form,
     FormControl,
@@ -64,7 +65,6 @@ async function singupAction(userprofile:RequestArgs) {
             body: JSON.stringify(userprofile),
         })
         const t:ResponseMessage = await queryDb.json();
-        console.log(t.message);
         return t;
     } catch (error: any) {
         throw new Error(error.message)

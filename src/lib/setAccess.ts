@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 const hashLen:number = 10
-const hashPassword = (pwd:string) => {
+const hashPassword = ( pwd:string ) => {
     return bcrypt.hashSync(pwd, hashLen)
 }
  

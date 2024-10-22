@@ -3,8 +3,6 @@ import {NextApiRequest, NextApiResponse} from 'next'
 import {hashPassword} from '@/lib/setAccess'
 import jwt from 'jsonwebtoken'
 import {secretKey} from '@/keys/secretKey'
-import { stat } from 'fs'
-
 
 type UserCreateInput = {
     name:string
@@ -68,6 +66,7 @@ const handler = async (
 
             const token = createUserToken({username:username}, '1h');
             res.setHeader('Authorization', `Bearer ${token}`);
+            res.setHeader('Set-Cookie', `token=${token}; Path=/;`);
             const newUserEmail = await db.profile.create({
                 data:{
                     bio: "1", // roles

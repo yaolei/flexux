@@ -2,6 +2,10 @@
 import {useState} from 'react'
 import {Button} from '@/components/ui/button'
 import { Mail } from "lucide-react"
+
+import {useAppDispatch, useAppSelector} from '@/lib/store'
+import {setLoginToggle, loginToggle} from '@/lib/features/loginState'
+
 interface UserDatasTyps {
     id:string;
     name?:string;
@@ -34,7 +38,9 @@ const handleQueryData = async () => {
 
 export default function Page () {
     const [datas, setDatas] = useState<UserDatasTyps[]>([])
-
+    const count = useAppSelector((state) => state.counter.value);
+    const isLogin = useAppSelector((state) => state.isloginState.isLogin);
+    const dispatch = useAppDispatch();
     const handleClickBtn = async() => {
         // const insertDb = await fetch('http://localhost:3000/api/create-user', {
         //     method: 'POST',
@@ -54,7 +60,12 @@ export default function Page () {
             <Button>
                 <Mail className="mr-2 h-4 w-4" /> Login with Email
             </Button>
-            <h1>Hello world from page.tsx!</h1>
+            <h1>Hello world from page.tsx! {count} </h1>
+
+            {isLogin?<div>login success</div>:<div>no login</div>}
+
+            <div onClick={() =>dispatch(setLoginToggle(true))}> toggle</div>
+
             {datas.length > 0 && datas.map((item:UserDatasTyps, i:number) => (
                 <div key={item.id + i}>name: {item.name} your id: {item.userId}</div>
             ))}
