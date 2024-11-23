@@ -67,6 +67,7 @@ const handler = async (
             const token = createUserToken({username:username}, '1h');
             res.setHeader('Authorization', `Bearer ${token}`);
             res.setHeader('Set-Cookie', `token=${token}; Path=/;`);
+            res.setHeader('Set-Cookie', `flexuxprofile=username=${username}-userIndex=${newUserId}; Path=/;`);
             const newUserEmail = await db.profile.create({
                 data:{
                     bio: "1", // roles

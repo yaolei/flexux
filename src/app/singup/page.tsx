@@ -3,7 +3,6 @@ import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import {useState} from 'react'
-import Cookies from 'js-cookie';
 import {
     Form,
     FormControl,
@@ -25,6 +24,8 @@ import { Button } from '@/components/ui/button'
 import {Label} from '@/components/ui/label'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation';
+import {useAppDispatch, useAppSelector} from '@/lib/store'
+import { setLoginToggle } from '@/lib/features/loginState'
 
 const iconStyle:string = " mr-2 size-10 ";
 
@@ -77,7 +78,8 @@ export default function profileForm () {
 
     const { toast } = useToast();
     const router = useRouter()
-    
+    const dispatch = useAppDispatch()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver:zodResolver(formSchema),
         defaultValues: {
@@ -89,6 +91,11 @@ export default function profileForm () {
 
    async function onSubmit(values:z.infer<typeof formSchema>) {
         const {states, message, error}  = await singupAction(values)
+
+        if (!error) {
+            dispatch(setLoginToggle(true));
+        }
+
         toast({
             title: error ?`Error: error number - ${states}`:  `Success !` ,
             description: message,

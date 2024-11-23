@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {NAVLISTROUTER} from '../lib/navlist'
 import {MenuIcon} from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect} from 'react'
 import { useRouter } from 'next/navigation';
 import {
     User,
@@ -40,10 +40,19 @@ import { useToast } from '@/hooks/use-toast'
 import Cookies from 'js-cookie';
 import {useAppDispatch, useAppSelector} from '@/lib/store'
 import { setLoginToggle } from '@/lib/features/loginState'
+import { setUserProfile } from '@/lib/features/userProfile'
+
+type UserProfilePro = {
+  username: string
+  userId: string
+  userRolle:string
+  userEmail:string
+}
 
 type validateDatasProp = {
   validateMessage:string
   validateState: boolean
+  informations: UserProfilePro
 }
 const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
   const router = useRouter();
@@ -99,7 +108,7 @@ const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
         })
 
         const validateDatas:validateDatasProp = await validateUser.json();
-        const {validateMessage, validateState} = validateDatas;
+        const {validateMessage, validateState, informations} = validateDatas;
         toast({
           title: validateState ? `Success login system.`: `Error: error number - 403`,
           description: validateState? `Success login and will link to login page.`: `Error: ${validateMessage}`,
@@ -109,12 +118,28 @@ const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
 
           if (validateState) {
           dispatch(setLoginToggle(true));
+          dispatch(setUserProfile({
+            username:informations.username,
+            userIndex: informations.userId,
+            userRolle:informations.userRolle,
+            userEmail:informations.userEmail
+          }))
+
+          Cookies.set('flexuxprofile', `username=${informations.username}-userIndex=${informations.userId}`)
+
             setTimeout(() => {
                 closeDialog();
-                router.push("login")
+                router.push("/")
+                // might change the current page to display when the user click the login success
             }, 1100)
           } else {
             dispatch(setLoginToggle(false));
+            dispatch(setUserProfile({
+              username:"",
+              userIndex:"",
+              userRolle:"",
+              userEmail:"",
+            }));
           }
         }
         catch (error: any) {
@@ -126,7 +151,15 @@ const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
 
   const exitLoginUser = () => {
     Cookies.remove('token');
+    Cookies.remove('flexuxprofile') 
     dispatch(setLoginToggle(false));
+    dispatch(setUserProfile({
+      username:"",
+      userIndex:"",
+      userRolle:"",
+      userEmail:"",
+    }));
+    router.push("/")
   }
 
   return (
@@ -186,19 +219,35 @@ const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
 
 const WebNav = () => {
   const pathname = usePathname();
-  
+  const isLogin = useAppSelector((state) => state.isloginState.isLogin)
+  // const userProfiles = useAppSelector((state) => state.userProfile)
+  const availableNavItems = (navId:number) => {
+      const availableNavItemsIds = [1, 2, 5];
+      if (availableNavItemsIds.includes(navId)) { 
+        return `p-2`
+      } else if (isLogin){
+          return `p-2`
+      } else {
+        return ` hidden `
+      }
+    }
+
     return (
       <nav>
         <ul className='flex justify-center'>
         { NAVLISTROUTER && NAVLISTROUTER.map((siteRoute)=> (
-            <li key={siteRoute.href + siteRoute.label} className='p-2'>
+
+            <li key={siteRoute.href + siteRoute.label} className={availableNavItems(siteRoute.MenuIconIndex)}>
               {siteRoute.label == 'login'? 
                     <DialogView closeDopDown={(flg)=> {}}/>
-            :<Link href={siteRoute?.href ? siteRoute?.href:""}
+            :
+              <Link href={siteRoute?.href ? siteRoute?.href:""}
                 className={`text-zinc-400 transition ${pathname ===siteRoute.href? "text-zinc-900 ": ""}  `}
                 >
                 {siteRoute.label}
-                </Link>
+               </Link>
+                
+
               }
             </li>
         ))} 
@@ -228,6 +277,19 @@ const MobileNav = () => {
   const handleCloseDropDown = (flg:boolean) => {
     setOpen(flg);
   }
+  const isLogin = useAppSelector((state) => state.isloginState.isLogin)
+  const availableNavItems = (navId:number) => {
+    const availableNavItemsIds = [1, 2, 5];
+    if (availableNavItemsIds.includes(navId)) { 
+      return `p-2`
+    } else if (isLogin){
+        return `p-2`
+    } else {
+      return ` hidden `
+    }
+  }
+
+
   return(
   <DropdownMenu open={open} onOpenChange={setOpen}>
     <DropdownMenuTrigger><MenuIcon className='text-left'/></DropdownMenuTrigger>
@@ -235,7 +297,7 @@ const MobileNav = () => {
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       { NAVLISTROUTER && NAVLISTROUTER.map((mobileRoute:IconPropsType)=> (
-        <div key={mobileRoute.href + mobileRoute.label}>
+        <div key={mobileRoute.href + mobileRoute.label} className={availableNavItems(mobileRoute.MenuIconIndex)}>
           {mobileRoute.label === 'login'? 
             <div key="loginH" className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                       {Icons[mobileRoute?.MenuIconIndex]}

@@ -47,6 +47,17 @@ model Category {
   posts Post[]
 }
 
+model Permission {
+  id          Int     @id @default(autoincrement())
+  bid         Int
+  roleName    String
+  read        Boolean
+  edit        Boolean
+  reject      Boolean
+  pid         String
+  description String
+}
+
 model CategoryToPost {
   A Int
   B Int
@@ -54,4 +65,13 @@ model CategoryToPost {
   @@unique([A, B], map: "_CategoryToPost_AB_unique")
   @@index([B], map: "_CategoryToPost_B_index")
   @@map("_CategoryToPost")
+}
+
+model TtsVoides {
+  id             Int      @id @default(autoincrement())
+  message_id     String
+  send_user_id   String   @db.VarChar(255)
+  send_user_name String
+  created_date   DateTime @default(now())
+  message_data   Bytes
 }

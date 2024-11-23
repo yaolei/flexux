@@ -3,7 +3,12 @@ CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
+    `createdTime` DATETIME(3) NOT NULL,
+    `lastUpdatedTime` DATETIME(3) NOT NULL,
+    `delete` INTEGER NOT NULL DEFAULT 1,
+    `password` VARCHAR(191) NOT NULL,
 
+    UNIQUE INDEX `User_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -11,7 +16,8 @@ CREATE TABLE `User` (
 CREATE TABLE `Profile` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `bio` VARCHAR(191) NOT NULL,
-    `userId` INTEGER NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `Profile_userId_key`(`userId`),
     PRIMARY KEY (`id`)
@@ -26,6 +32,7 @@ CREATE TABLE `Post` (
     `published` BOOLEAN NOT NULL DEFAULT false,
     `authorId` INTEGER NOT NULL,
 
+    INDEX `Post_authorId_idx`(`authorId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -33,6 +40,20 @@ CREATE TABLE `Post` (
 CREATE TABLE `Category` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Permission` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `bid` INTEGER NOT NULL,
+    `roleName` VARCHAR(191) NOT NULL,
+    `read` BOOLEAN NOT NULL,
+    `edit` BOOLEAN NOT NULL,
+    `reject` BOOLEAN NOT NULL,
+    `pid` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
