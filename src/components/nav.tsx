@@ -189,7 +189,7 @@ const DialogView = ({closeDopDown}:{closeDopDown:(flg:boolean)=> void}) => {
             </Label>
             <Input
               id="name"
-              defaultValue="test3"
+              defaultValue="test"
               className="col-span-3"
               ref={_userName}
             />
@@ -222,7 +222,7 @@ const WebNav = () => {
   const isLogin = useAppSelector((state) => state.isloginState.isLogin)
   // const userProfiles = useAppSelector((state) => state.userProfile)
   const availableNavItems = (navId:number) => {
-      const availableNavItemsIds = [1, 2, 5];
+      const availableNavItemsIds = [1, 5];
       if (availableNavItemsIds.includes(navId)) { 
         return `p-2`
       } else if (isLogin){
@@ -279,7 +279,7 @@ const MobileNav = () => {
   }
   const isLogin = useAppSelector((state) => state.isloginState.isLogin)
   const availableNavItems = (navId:number) => {
-    const availableNavItemsIds = [1, 2, 5];
+    const availableNavItemsIds = [1, 5];
     if (availableNavItemsIds.includes(navId)) { 
       return `p-2`
     } else if (isLogin){
