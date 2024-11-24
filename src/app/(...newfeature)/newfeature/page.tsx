@@ -59,8 +59,10 @@ export default function Page () {
         const cookiesuserId = await handleGetCookieData("userIndex");
         if (textAreRef.current && textAreRef.current.value.length > 0) {
 
-            const transfromBackEndUrl = `http://${window.location.hostname}/pytts/tts`;
-            // const transfromBackEndUrl = `http://${window.location.hostname}:8000/pytts/tts`;
+            let transfromBackEndUrl = `https://${window.location.hostname}/pytts/tts`;
+            if (window.location.hostname == 'localhost') {
+                transfromBackEndUrl = `http://${window.location.hostname}:8000/pytts/tts`
+            }
             const sendTransformData = await fetch(transfromBackEndUrl, {
                 headers: {
                   'Content-Type': 'application/json',
