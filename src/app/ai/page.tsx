@@ -105,7 +105,8 @@ export default function Chat () {
     const cookiesuserId = await handleGetCookieData("userIndex");
     if (transfromSen && transfromSen.length > 0) {
 
-        const transfromBackEndUrl = `http://${window.location.hostname}:pytts/tts`;
+        const transfromBackEndUrl = `http://${window.location.hostname}/pytts/tts`;
+        // const transfromBackEndUrl = `http://${window.location.hostname}:8000/pytts/tts`;
         const sendTransformData = await fetch(transfromBackEndUrl, {
             headers: {
               'Content-Type': 'application/json',
