@@ -62,8 +62,7 @@ export default function Chat () {
   const audioRef = useRef<HTMLAudioElement>(null);
   const {userIndex, username} = useAppSelector((state) => state.userProfile)
 
-  const fetchAudio = async (userId:string) => {
-     
+  const fetchAudio = async (username: string, userId:string) => {
     let url = `https://${window.location.host}/api/query-mp3`;
     if (window.location.hostname == 'localhost') {
         url = `http://${window.location.host}/api/query-mp3`;
@@ -73,7 +72,7 @@ export default function Chat () {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({userId: userId}),
+            body: JSON.stringify({username: username, userId: userId}),
             method: 'POST'
         });
         const blob = await response.blob();
@@ -125,8 +124,8 @@ export default function Chat () {
             method: 'POST',
           })
           const result = await sendTransformData.json()
-          if (result.state === 'ok' && audioRef.current && cookiesuserId) {
-            fetchAudio(cookiesuserId)
+          if (result.state === 'ok' && audioRef.current && cookiesuserId && cookiesuserName) {
+            fetchAudio(cookiesuserName, cookiesuserId)
           }
     }
   }
