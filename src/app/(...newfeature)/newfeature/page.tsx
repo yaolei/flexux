@@ -12,7 +12,10 @@ export default function Page () {
 
     const fetchAudio = async (userId:string) => {
      
-        const url = `http://${window.location.host}/api/query-mp3`;
+        let url = `https://${window.location.host}/api/query-mp3`;
+        if (window.location.hostname == 'localhost') {
+            url = `http://${window.location.host}/api/query-mp3`;
+        }
           try {
             const response = await fetch(url,{
                 headers: {
